@@ -58,3 +58,24 @@ def cross_entropy_error(y,t):
 def softmax_loss(X,t):
     y=softmax(X)
     return cross_entropy_error(y,t)
+
+
+class SoftmaxWithLoss:
+    def __init__(self):
+        self.loss=None # 손실
+        self.y=None # 결과
+        self.t=None # 정답
+
+    def forward(self, x, t):
+        self.y = softmax(x)
+        self.t = t
+        self.loss=cross_entropy_error(self.y, self.t)
+        
+        return self.loss
+    
+    def backward(self, dout=1):
+        batch_size = self.t.shape[0]
+        dx=(self.y-self.t)/batch_size
+
+        return dx
+            
