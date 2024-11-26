@@ -141,8 +141,11 @@ if __name__ == "__main__":
             test_acc = network.accuracy(x_test, t_test)
             train_acc_list.append(train_acc)
             test_acc_list.append(test_acc)
-            print(train_acc, test_acc)
-
+            print(f'Train: {train_acc}, Test: {test_acc}')
+    
+    train_acc=network.accuracy(x_train, t_train)
+    test_acc = network.accuracy(x_test, t_test)
+    print(f'Train: {train_acc}, Test: {test_acc}')
 
 
 

@@ -174,4 +174,4 @@ for i in range(0,len(x),batch_size):
 print("Accuracy_batch:" +str(float(accuracy_cnt)/len(x)))
 
 
-# python chapter3.py
+# python chapter1-3.py

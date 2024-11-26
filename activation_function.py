@@ -12,6 +12,9 @@ def identity_function(x):
 def relu(x):
     return np.maximum(0,x)
 
+def tanh(x):
+    return np.tanh(x)
+
 def softmax_past(a):
     c=np.max(a) # 오버플로우 문제 해결
 
@@ -31,13 +34,21 @@ def relu_grad(x):
 
 def softmax(x):
     if x.ndim == 2:
-        x=x.T
-        x=x-np.max(x,axis=0)
-        y=np.exp(x)/np.sum(np.exp(x),axis=0)
-        return y.T
+        x=x-x.max(axis=1,keepdims=True)
+        x=np.exp(x)
+        x/=x.sum(axis=1, keepdims=True)
+    elif x.ndim==1:
+        x=x-np.max(x)
+        x=np.exp(x)/np.sum(np.exp(x))
+
+    #     x=x.T
+    #     x=x-np.max(x,axis=0)
+    #     y=np.exp(x)/np.sum(np.exp(x),axis=0)
+    #     return y.T
     
-    x=x-np.max(x) # 오버플로우 대책
-    return np.exp(x)/np.sum(np.exp(x))
+    # x=x-np.max(x) # 오버플로우 대책
+    # np.exp(x)/np.sum(np.exp(x))
+    return x
 
 def mean_squared_error(y,t):
     return 0.5 * np.sum((y-t)**2)
@@ -60,22 +71,5 @@ def softmax_loss(X,t):
     return cross_entropy_error(y,t)
 
 
-class SoftmaxWithLoss:
-    def __init__(self):
-        self.loss=None # 손실
-        self.y=None # 결과
-        self.t=None # 정답
 
-    def forward(self, x, t):
-        self.y = softmax(x)
-        self.t = t
-        self.loss=cross_entropy_error(self.y, self.t)
-        
-        return self.loss
-    
-    def backward(self, dout=1):
-        batch_size = self.t.shape[0]
-        dx=(self.y-self.t)/batch_size
-
-        return dx
             

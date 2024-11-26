@@ -190,4 +190,4 @@ print("total_loss",total_loss/iters_num)
 print("total_acc",acc)
 
 
-# python chapter4.py
+# python chapter1-4.py
