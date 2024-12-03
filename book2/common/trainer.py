@@ -41,7 +41,9 @@ class Trainer:
                 params, grads = remove_duplicate(model.params, model.grads)  # 공유된 가중치를 하나로 모음
                 if max_grad is not None:
                     clip_grads(grads, max_grad)
+                import IPython; IPython.embed(colors='Linux'); exit(1)
                 optimizer.update(params, grads)
+
                 total_loss += loss
                 loss_count += 1
 
@@ -61,9 +63,11 @@ class Trainer:
         if ylim is not None:
             plt.ylim(*ylim)
         plt.plot(x, self.loss_list, label='train')
-        plt.xlabel('반복 (x' + str(self.eval_interval) + ')')
-        plt.ylabel('손실')
+        plt.xlabel('iteration (x' + str(self.eval_interval) + ')')
+        plt.ylabel('loss')
+        # import IPython; IPython.embed(colors='Linux'); exit(1)
         plt.show()
+        plt.savefig('fig1.png')
 
 
 class RnnlmTrainer:

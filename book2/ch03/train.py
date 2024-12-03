@@ -17,6 +17,7 @@ corpus, word_to_id, id_to_word = preprocess(text)
 
 vocab_size = len(word_to_id)
 contexts, target = create_contexts_target(corpus, window_size)
+import IPython; IPython.embed(colors='Linux'); exit(1)
 target = convert_one_hot(target, vocab_size)
 contexts = convert_one_hot(contexts, vocab_size)
 
@@ -25,6 +26,7 @@ optimizer = Adam()
 trainer = Trainer(model, optimizer)
 
 trainer.fit(contexts, target, max_epoch, batch_size)
+
 trainer.plot()
 
 word_vecs = model.word_vecs
