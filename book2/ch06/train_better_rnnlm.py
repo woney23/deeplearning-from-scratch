@@ -65,3 +65,5 @@ for epoch in range(max_epoch):
 model.reset_state()
 ppl_test = eval_perplexity(model, corpus_test)
 print('테스트 퍼플렉서티: ', ppl_test)
+
+#ch06\train_better_rnnlm.py

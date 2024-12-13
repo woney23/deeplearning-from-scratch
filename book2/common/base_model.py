@@ -30,7 +30,7 @@ class BaseModel:
 
     def load_params(self, file_name=None):
         if file_name is None:
-            file_name = self.__class__.__name__ + '.pkl'
+            file_name = self.__class__.__name__ + '_book.pkl'
 
         if '/' in file_name:
             file_name = file_name.replace('/', os.sep)

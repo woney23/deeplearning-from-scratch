@@ -16,13 +16,14 @@ from peeky_seq2seq import PeekySeq2seq
 char_to_id, id_to_char = sequence.get_vocab()
 
 # 입력 반전 여부 설정 =============================================
-is_reverse = False  # True
+is_reverse = False # True
 if is_reverse:
     x_train, x_test = x_train[:, ::-1], x_test[:, ::-1]
 # ================================================================
 
 # 하이퍼파라미터 설정
 vocab_size = len(char_to_id)
+print(vocab_size)
 wordvec_size = 16
 hidden_size = 128
 batch_size = 128
@@ -30,8 +31,8 @@ max_epoch = 25
 max_grad = 5.0
 
 # 일반 혹은 엿보기(Peeky) 설정 =====================================
-model = Seq2seq(vocab_size, wordvec_size, hidden_size)
-# model = PeekySeq2seq(vocab_size, wordvec_size, hidden_size)
+# model = Seq2seq(vocab_size, wordvec_size, hidden_size)
+model = PeekySeq2seq(vocab_size, wordvec_size, hidden_size)
 # ================================================================
 optimizer = Adam()
 trainer = Trainer(model, optimizer)
@@ -55,8 +56,10 @@ for epoch in range(max_epoch):
 # 그래프 그리기
 x = np.arange(len(acc_list))
 plt.plot(x, acc_list, marker='o')
-plt.xlabel('에폭')
-plt.ylabel('정확도')
+plt.xlabel('epoch')
+plt.ylabel('accuracy')
 plt.ylim(0, 1.0)
 plt.show()
 
+# 한 에폭당 약 33초 정도 소요 33*25 에폭
+# peeky seq2seq 은 한 에폭당 35초 정도 소요 35*25 에폭

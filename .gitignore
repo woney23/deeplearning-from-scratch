@@ -1,4 +1,5 @@
 /history/
 /data/
-
-
+/book2/dataset/ptb.test.txt
+/book2/dataset/ptb.train.txt
+/book2/dataset/ptb.valid.txt

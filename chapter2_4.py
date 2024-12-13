@@ -5,7 +5,7 @@ sys.path.append('..')
 from np import * 
 from layers import *
 import config
-config.GPU = True
+# config.GPU = True
 import pickle
 from Trainer import Trainer
 from optimizer import *
@@ -120,7 +120,7 @@ class NegativeSamplingLoss:
         negative_sample = self.sampler.get_negative_sample(target)
 
         #긍정적인 예 순전파
-        score = self.embed_dot_layers[0].forward(target)
+        score = self.embed_dot_layers[0].forward(h, target)
         correct_label = np.ones(batch_size, dtype=np.int32)
         loss=self.loss_layers[0].forward(score, correct_label)
 
@@ -191,7 +191,7 @@ if __name__ =="__main__":
     window_size = 5
     hidden_size = 100
     batch_size = 100
-    max_epoch = 10
+    max_epoch = 5
 
     # data read
     corpus, word_to_id, id_to_word = ptb.load_data('train')
@@ -218,7 +218,7 @@ if __name__ =="__main__":
     params['word_vecs']= word_vecs.astype(np.float16)
     params['word_to_id'] = word_to_id
     params['id_to_word'] = id_to_word
-    pkl_file = 'cbow_params_pkl'
+    pkl_file = 'cbow_params.pkl'
 
     with open(pkl_file, 'wb') as f:
         pickle.dump(params, f, -1)

@@ -22,15 +22,16 @@ x_train, x_test = x_train[:, ::-1], x_test[:, ::-1]
 
 # 하이퍼파라미터 설정
 vocab_size = len(char_to_id)
+print(vocab_size)
 wordvec_size = 16
 hidden_size = 256
 batch_size = 128
 max_epoch = 10
 max_grad = 5.0
 
-model = AttentionSeq2seq(vocab_size, wordvec_size, hidden_size)
+# model = AttentionSeq2seq(vocab_size, wordvec_size, hidden_size)
 # model = Seq2seq(vocab_size, wordvec_size, hidden_size)
-# model = PeekySeq2seq(vocab_size, wordvec_size, hidden_size)
+model = PeekySeq2seq(vocab_size, wordvec_size, hidden_size)
 
 optimizer = Adam()
 trainer = Trainer(model, optimizer)
@@ -57,7 +58,9 @@ model.save_params()
 # 그래프 그리기
 x = np.arange(len(acc_list))
 plt.plot(x, acc_list, marker='o')
-plt.xlabel('에폭')
-plt.ylabel('정확도')
+plt.xlabel('epoch')
+plt.ylabel('accuracy')
 plt.ylim(-0.05, 1.05)
 plt.show()
+
+# 한 에폭당 350초 정도 소요됌. 350*10

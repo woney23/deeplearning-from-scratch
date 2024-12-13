@@ -1,4 +1,4 @@
-# coding: utf-8
+
 import sys
 sys.path.append('..')
 from rnnlm import Rnnlm
@@ -8,8 +8,8 @@ from common.util import eval_perplexity
 
 
 if __name__ == '__main__':
-    model = Rnnlm()
-    #model = BetterRnnlm()
+    # model = Rnnlm()
+    model = BetterRnnlm()
 
     # 학습된 매개변수 읽기
     model.load_params()

@@ -66,8 +66,9 @@ class Trainer:
         plt.xlabel('iteration (x' + str(self.eval_interval) + ')')
         plt.ylabel('loss')
         # import IPython; IPython.embed(colors='Linux'); exit(1)
+        plt.savefig('fig2.png')
         plt.show()
-        plt.savefig('fig1.png')
+
 
 
 class RnnlmTrainer:
